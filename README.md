@@ -1,1 +1,3 @@
-# odin-inventory
+# Odin Inventory Application Project
+
+## Express.js, PostgreSQL
