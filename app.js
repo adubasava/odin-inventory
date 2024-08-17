@@ -9,6 +9,7 @@ const expressLayouts = require("express-ejs-layouts");
 const app = express();
 
 const indexRouter = require("./routes/index");
+const categoryRouter = require("./routes/category");
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -21,6 +22,7 @@ app.use(expressLayouts);
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
+app.use("/categories", categoryRouter);
 
 const PORT = process.env.PORT || 3000;
 

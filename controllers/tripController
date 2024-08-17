@@ -1,10 +1,54 @@
 ﻿const db = require("../db/queries");
 
+// --- CATEGORIES ---
+
 async function getCategories(req, res) {
-  const categories = await db.getAllCategories();
-  res.render("index", { categories: categories });
+  try {
+    const categories = await db.getAllCategories();
+    res.render("index", { categories: categories });
+  } catch {
+    res.redirect("/");
+  }
+}
+
+async function browseCategories(req, res) {
+  try {
+    const categories = await db.getAllCategories();
+    res.render("categories/index", { categories: categories });
+  } catch {
+    res.redirect("/");
+  }
+}
+
+async function newCategoryForm(req, res) {
+  res.render("categories/new");
+}
+
+async function creatNewCategory(req, res) {
+  const categoryName = req.body.name;
+  try {
+    await db.addCategory(categoryName);
+    res.redirect("/");
+  } catch {
+    res.render("categories/new", {
+      categoryName: categoryName,
+      errorMessage: "Error creating Category",
+    });
+  }
+}
+
+async function renderCategory(req, res) {
+  const categoryName = req.params.id;
+  let category = await db.getCategoryByName(categoryName);
+  res.render("categories/category", {
+    category: category,
+  });
 }
 
 module.exports = {
   getCategories,
+  browseCategories,
+  newCategoryForm,
+  creatNewCategory,
+  renderCategory,
 };
