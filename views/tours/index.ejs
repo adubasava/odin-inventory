@@ -1,0 +1,6 @@
+﻿<% tours.forEach(tour => { %>
+    <a href="tours/<%= tour.id %>"><%= tour.title %> </a>
+    <h3><%= tour.description %> </h3>
+    <h3><%= tour.location %> </h3>
+    <h3>Category: <%= tour.name %> </h3>
+<% }); %>  

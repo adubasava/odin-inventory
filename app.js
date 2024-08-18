@@ -10,6 +10,7 @@ const app = express();
 
 const indexRouter = require("./routes/index");
 const categoryRouter = require("./routes/category");
+const tourRouter = require("./routes/tour");
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -23,6 +24,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
 app.use("/categories", categoryRouter);
+app.use("/tours", tourRouter);
 
 const PORT = process.env.PORT || 3000;
 

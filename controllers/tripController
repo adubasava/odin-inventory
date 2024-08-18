@@ -39,10 +39,64 @@ async function creatNewCategory(req, res) {
 
 async function renderCategory(req, res) {
   const categoryName = req.params.id;
-  let category = await db.getCategoryByName(categoryName);
+  const category = await db.getCategoryByName(categoryName);
+  const tours = await db.getTourByCategory(categoryName);
   res.render("categories/category", {
     category: category,
+    tours: tours,
   });
+}
+
+// --- TOURS ---
+
+async function getTours(req, res) {
+  try {
+    const tours = await db.getAllTours();
+    res.render("tours/index", { tours: tours });
+  } catch {
+    res.redirect("/");
+  }
+}
+
+async function newTourForm(req, res) {
+  try {
+    const categories = await db.getAllCategories();
+    res.render("tours/new", { categories: categories });
+  } catch (e) {
+    console.error(e.message);
+    res.redirect("/tours");
+  }
+}
+
+async function creatNewTour(req, res) {
+  const { title, description, location, categoryId } = req.body;
+  try {
+    await db.addTour(title, description, location, categoryId);
+    res.redirect("/tours");
+  } catch (e) {
+    console.error(e.message);
+    res.render("tours/new", {
+      errorMessage: "Error creating Tour",
+    });
+  }
+}
+
+async function renderTour(req, res) {
+  const tourId = req.params.id;
+  console.log(tourId);
+  try {
+    const tour = await db.getTourById(tourId);
+    if (tour.length > 0) {
+      res.render("tours/tour", {
+        tour: tour,
+      });
+    } else {
+      res.redirect("/tours");
+    }
+  } catch (e) {
+    console.error(e.message);
+    res.redirect("/tours");
+  }
 }
 
 module.exports = {
@@ -51,4 +105,8 @@ module.exports = {
   newCategoryForm,
   creatNewCategory,
   renderCategory,
+  getTours,
+  renderTour,
+  newTourForm,
+  creatNewTour,
 };

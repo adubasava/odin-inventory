@@ -1,1 +1,10 @@
 ﻿<%= category[0].name %>
+
+<% tours.forEach(tour => { %>
+    <h4><%= tour.title %> </h4> 
+    <h3><%= tour.description %> </h3>
+    <h3><%= tour.location %> </h3>
+    <h3>Category: <%= tour.name %> </h3>
+<% }); %>  
+
+<a href="/categories">Back to Categories </a>
