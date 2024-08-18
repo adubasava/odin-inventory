@@ -40,12 +40,17 @@ async function creatNewCategory(req, res) {
 
 async function renderCategory(req, res) {
   const categoryName = req.params.id;
-  const category = await db.getCategoryByName(categoryName);
-  const tours = await db.getTourByCategory(categoryName);
-  res.render("categories/category", {
-    category: category,
-    tours: tours,
-  });
+  try {
+    const category = await db.getCategoryByName(categoryName);
+    const tours = await db.getTourByCategory(categoryName);
+    res.render("categories/category", {
+      category: category,
+      tours: tours,
+    });
+  } catch (e) {
+    console.error(e.message);
+    res.redirect("/");
+  }
 }
 
 async function editCategoryForm(req, res) {
