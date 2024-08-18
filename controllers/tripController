@@ -21,7 +21,8 @@ async function browseCategories(req, res) {
 }
 
 async function newCategoryForm(req, res) {
-  res.render("categories/new");
+  const name = "";
+  res.render("categories/new", { name: name });
 }
 
 async function creatNewCategory(req, res) {
@@ -47,6 +48,53 @@ async function renderCategory(req, res) {
   });
 }
 
+async function editCategoryForm(req, res) {
+  try {
+    const name = req.params.id;
+    res.render(`categories/edit`, { name: name });
+  } catch {
+    res.redirect("/categories");
+  }
+}
+
+async function editCategory(req, res) {
+  const oldName = req.params.id;
+  const newName = req.body.name;
+  try {
+    await db.updateCategory(newName, oldName);
+    res.redirect("/");
+  } catch (e) {
+    console.error(e.message);
+    res.render("categories/edit", {
+      name: oldName,
+      errorMessage: "Error editing Category",
+    });
+  }
+}
+
+async function deleteCategory(req, res) {
+  const categoryName = req.params.id;
+  const tours = await db.getTourByCategory(categoryName);
+  const categories = await db.getAllCategories();
+  if (tours.length > 0) {
+    res.render("categories/index", {
+      categories: categories,
+      errorMessage: "Cannot delete non-empty category. Delete tours before",
+    });
+  } else if (tours.length === 0) {
+    try {
+      await db.removeCategory(categoryName);
+      res.redirect("/");
+    } catch (e) {
+      console.error(e.message);
+      res.render("categories/index", {
+        categories: categories,
+        errorMessage: "Error deliting Category",
+      });
+    }
+  }
+}
+
 // --- TOURS ---
 
 async function getTours(req, res) {
@@ -70,8 +118,9 @@ async function newTourForm(req, res) {
 
 async function creatNewTour(req, res) {
   const { title, description, location, categoryId } = req.body;
+  const image = "";
   try {
-    await db.addTour(title, description, location, categoryId);
+    await db.addTour(title, description, location, image, categoryId);
     res.redirect("/tours");
   } catch (e) {
     console.error(e.message);
@@ -83,7 +132,6 @@ async function creatNewTour(req, res) {
 
 async function renderTour(req, res) {
   const tourId = req.params.id;
-  console.log(tourId);
   try {
     const tour = await db.getTourById(tourId);
     if (tour.length > 0) {
@@ -109,4 +157,7 @@ module.exports = {
   renderTour,
   newTourForm,
   creatNewTour,
+  editCategoryForm,
+  editCategory,
+  deleteCategory,
 };

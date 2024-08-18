@@ -1,4 +1,12 @@
-﻿<h4><%= tour[0].title %></h4>
+﻿<% if (tour[0].image != null && tour[0].image != '') { %> 
+    <img
+  src="/images/<%= tour[0].image %>"
+  alt="<%= tour[0].title %>"
+  width="150"
+/>
+<% } %>
+
+<h4><%= tour[0].title %></h4>
 <h3><%= tour[0].description %></h3>
 <h3><%= tour[0].location %></h3>
 <h3>Category: <%= tour[0].name %></h3>

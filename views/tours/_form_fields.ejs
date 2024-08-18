@@ -1,18 +1,16 @@
 ﻿<label for="title">Tour title: </label>
 <input id="title" type="text" name="title" />
 <label for="description">Short description: </label>
-<textarea name="description" />
+<textarea name="description" id="description" />
 </textarea>
 <label for="location">Location: </label>
 <input id="location" type="text" name="location" />
 <label for="categoryId">Category: </label>
-<select name="categoryId">
+<select name="categoryId" id="categoryId">
 <% categories.forEach(category => { %>
     <option value="<%= category.id %>">
         <%= category.name %>
     </option>
 <% }); %>  
 </select> 
-<label for="pic">Picture: </label>
-<input id="pic" type="file" name="pic" />
 

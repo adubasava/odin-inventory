@@ -1,6 +1,15 @@
 ﻿<% tours.forEach(tour => { %>
+    <% if (tour.image != null && tour.image != '') { %> 
+        <img
+      src="/images/<%= tour.image %>"
+      alt="<%= tour.title %>"
+      width="150"
+    />
+    <% } %>
+
     <a href="tours/<%= tour.id %>"><%= tour.title %> </a>
     <h3><%= tour.description %> </h3>
     <h3><%= tour.location %> </h3>
     <h3>Category: <%= tour.name %> </h3>
 <% }); %>  
+

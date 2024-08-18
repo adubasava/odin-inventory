@@ -1,0 +1,6 @@
+﻿<p>Edit Category</p>
+<form method="POST" action="/categories/<%= name %>/edit">
+  <%- include("_form_fields") %>
+  <a href="/categories/<%= name %>">Cancel</a>
+  <button class="submit" type="submit">Update</button>
+</form>

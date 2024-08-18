@@ -12,7 +12,8 @@ CREATE TABLE IF NOT EXISTS tours (
    title VARCHAR (100),
    description VARCHAR (500),
    location VARCHAR (200),
-   category_id INT,  
+   category_id INT,
+   image VARCHAR (200),  
    CONSTRAINT fk_categories
       FOREIGN KEY(category_id) 
         REFERENCES categories(id)
@@ -25,11 +26,11 @@ VALUES
   ('Sea'), 
   ('City tours');
 
-INSERT INTO tours (title, description, location, category_id)
+INSERT INTO tours (title, description, location, image, category_id)
 VALUES 
-  ('Trip to Tatry', 'Vacation on Tatry', 'Poland', 1), 
-  ('Trip to Baltic shore', 'Vacation on Baltic Sea', 'Lithuania', 2), 
-  ('Trip to Paris', 'See France!', 'France', 3);  
+  ('Trip to Tatry', 'Vacation on Tatry', 'Poland', 'mountain.jpg', 1), 
+  ('Trip to Baltic shore', 'Vacation on Baltic Sea', 'Lithuania', 'sea.jpg', 2), 
+  ('Trip to Paris', 'See France!', 'France', 'paris.jpg', 3); 
 `;
 
 async function main() {

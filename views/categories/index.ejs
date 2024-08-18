@@ -1,3 +1,6 @@
 ﻿<% categories.forEach(category => { %>
     <li><a href="categories/<%= category.name %>"><%= category.name %> </a>
+        <a href="categories/<%= category.name %>">View</a>
+        <a href="categories/<%= category.name %>/edit">Edit</a>
+        <a href="categories/<%= category.name %>/delete">Delete</a>
 <% }); %>  
