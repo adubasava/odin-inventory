@@ -1,6 +1,7 @@
-﻿<%= category[0].name %>
-<a href="categories/<%= category.name %>/edit">Edit</a>
-<a href="categories/<%= category.name %>/delete">Delete</a>
+﻿<h2 class="page-header"><%= category[0].name %></h2>
+
+<a class="btn btn-primary" href="/categories/<%= category.name %>/edit">Edit</a>
+<a class="btn btn-danger" href="/categories/<%= category.name %>/delete">Delete</a>
 
 <% if (tours.length > 0) { %>
 <h2>Tours in Category</h2>
@@ -13,4 +14,4 @@
 <% } %>
  
 
-<a href="/categories">Back to Categories </a>
+<a class="btn btn-primary" href="/categories">Back to Categories </a>

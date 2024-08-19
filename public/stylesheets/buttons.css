@@ -1,0 +1,51 @@
+﻿:root {
+  --color-btn-border: black;
+  --color-btn-default: black;
+  --color-btn-primary-background: var(--color-text-light);
+  --color-btn-danger-background: var(--color-danger-light);
+  --color-btn-primary-background-dark: var(--color-text-dark);
+  --color-btn-danger-background-dark: var(--color-danger-dark);
+}
+
+.btn {
+  border: 1px solid var(--color-btn-border);
+  border-radius: 0.5rem;
+  color: var(--color-btn-default);
+  padding: 0.5rem 1rem;
+  font-size: 1.2rem;
+  font-family: "Sedan", serif;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+}
+
+.btn-primary {
+  background-color: var(--color-btn-primary-background);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-btn-primary-background-dark);
+  color: white;
+}
+
+.btn-danger {
+  background-color: var(--color-btn-danger-background);
+}
+
+.btn-danger:hover {
+  background-color: var(--color-btn-danger-background-dark);
+  color: white;
+}
+
+.btn-row {
+  display: flex;
+  align-items: flex-start;
+}
+
+.btn-row > * {
+  margin-left: 1rem;
+}
+
+.btn-row > *:first-child {
+  margin-left: 0;
+}

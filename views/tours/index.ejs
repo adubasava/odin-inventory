@@ -1,4 +1,5 @@
-﻿<% tours.forEach(tour => { %>
+﻿<h2 class="page-header">Tours</h2>
+<% tours.forEach(tour => { %>
     <% if (tour.image != null && tour.image != '') { %> 
         <img
       src="/images/<%= tour.image %>"
@@ -7,13 +8,13 @@
     />
     <% } %>
 
-    <a href="tours/<%= tour.id %>"><%= tour.title %> </a>
+    <a href="/tours/<%= tour.id %>"><%= tour.title %> </a>
     <h3><%= tour.description %> </h3>
     <h3><%= tour.location %> </h3>
     <h3>Category: <%= tour.name %> </h3>
 
-    <a href="tours/<%= tour.id %>">View</a>
-    <a href="tours/<%= tour.id %>/edit">Edit</a>
-    <a href="tours/<%= tour.id %>/delete">Delete</a>
+    <a class="btn btn-primary" href="/tours/<%= tour.id %>">View</a>
+    <a class="btn btn-primary" href="/tours/<%= tour.id %>/edit">Edit</a>
+    <a class="btn btn-danger" href="/tours/<%= tour.id %>/delete">Delete</a>
 <% }); %>  
 

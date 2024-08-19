@@ -1,6 +1,9 @@
-﻿<% categories.forEach(category => { %>
-    <li><a href="categories/<%= category.name %>"><%= category.name %> </a>
-        <a href="categories/<%= category.name %>">View</a>
-        <a href="categories/<%= category.name %>/edit">Edit</a>
-        <a href="categories/<%= category.name %>/delete">Delete</a>
+﻿<h2 class="page-header">Categories</h2>
+<% categories.forEach(category => { %>
+    <div><a href="/categories/<%= category.name %>"><%= category.name %> </a></div>
+    <div class="btn-row">
+        <a class="btn btn-primary" href="/categories/<%= category.name %>">View</a>
+        <a class="btn btn-primary" href="/categories/<%= category.name %>/edit">Edit</a>
+        <a class="btn btn-danger" href="/categories/<%= category.name %>/delete">Delete</a>
+    </div>        
 <% }); %>  
