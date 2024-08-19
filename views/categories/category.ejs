@@ -5,13 +5,13 @@
 
 <% if (tours.length > 0) { %>
 <h2 class="page-header">Tours in Category</h2>
-<% tours.forEach(tour => { %>
-    <h4><%= tour.title %> </h4> 
-    <h3><%= tour.description %> </h3>
-    <h3><%= tour.location %> </h3>
-    <h3>Category: <%= tour.name %> </h3>
-<% }); %> 
+<div class="tour-grid">
+    <% tours.forEach(tour => { %>
+        <h4><%= tour.title %> </h4> 
+        <h3><%= tour.description %> </h3>
+        <h3><%= tour.location %> </h3>
+        <h3>Category: <%= tour.name %> </h3>
+    <% }); %>     
+</div>
 <% } %>
- 
-
 <a class="btn btn-primary" href="/categories">Back to Categories </a>

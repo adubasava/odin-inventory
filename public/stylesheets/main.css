@@ -2,6 +2,8 @@
 @import "header.css";
 @import "buttons.css";
 @import "form.css";
+@import "category.css";
+@import "tour.css";
 
 :root {
   font-family: "Sedan", serif;
@@ -28,4 +30,8 @@
 .page-header {
   font-size: 2rem;
   font-weight: 500;
+}
+
+.error-message {
+  color: var(--color-danger-dark);
 }

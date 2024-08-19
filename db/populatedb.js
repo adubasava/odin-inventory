@@ -4,12 +4,12 @@ const { Client } = require("pg");
 const SQL = `
 CREATE TABLE IF NOT EXISTS categories (
    id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-   name VARCHAR (100)
+   name VARCHAR (100) UNIQUE
 );
 
 CREATE TABLE IF NOT EXISTS tours (
    id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-   title VARCHAR (100),
+   title VARCHAR (100) UNIQUE,
    description VARCHAR (500),
    location VARCHAR (200),
    category_id INT,

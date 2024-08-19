@@ -1,0 +1,43 @@
+﻿.tour-grid {
+  display: grid;
+  justify-content: center;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fill, 250px);
+}
+
+.tour-details {
+  display: flex;
+  margin-bottom: 3rem;
+  gap: 1.5rem;
+}
+
+.tour-details-label {
+  font-size: 1.2rem;
+  font-weight: 500;
+  align-self: flex-start;
+}
+
+.tour-details-grid {
+  display: grid;
+  align-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+  grid-template-columns: auto auto;
+}
+
+.tour-details-btn-grid {
+  display: grid;
+  justify-items: flex-start;
+  align-items: flex-start;
+  align-content: flex-start;
+  grid-template-areas:
+    "edit delete"
+    "cat cat";
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.tour-details-category-btn {
+  grid-area: cat;
+  justify-self: stretch;
+}

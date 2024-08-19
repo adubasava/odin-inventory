@@ -1,26 +1,29 @@
 ﻿<h2 class="page-header">Tours</h2>
-<% tours.forEach(tour => { %>
-  <div>
-    <% if (tour.image != null && tour.image != '') { %> 
-      <img
-    src="/images/<%= tour.image %>"
-    alt="<%= tour.title %>"
-    width="150"
-  />
-  <% } %>
-  </div>
-  <div>
-    <a href="/tours/<%= tour.id %>"><%= tour.title %> </a>
-  </div>
-    
-  <h3><%= tour.description %> </h3>
-  <h3><%= tour.location %> </h3>
-  <h3>Category: <%= tour.name %> </h3>
+<div class="tour-grid">
+  <% tours.forEach(tour => { %>
+    <div>
+      <% if (tour.image != null && tour.image != '') { %> 
+        <img
+      src="/images/<%= tour.image %>"
+      alt="<%= tour.title %>"
+      width="150"
+    />
+    <% } %>
+    </div>
+    <div>
+      <a href="/tours/<%= tour.id %>"><%= tour.title %> </a>
+    </div>
+      
+    <h3><%= tour.description %> </h3>
+    <h3><%= tour.location %> </h3>
+    <h3>Category: <%= tour.name %> </h3>
+  
+    <div class="btn-row">
+      <a class="btn btn-primary" href="/tours/<%= tour.id %>">View</a>
+      <a class="btn btn-primary" href="/tours/<%= tour.id %>/edit">Edit</a>
+      <a class="btn btn-danger" href="/tours/<%= tour.id %>/delete">Delete</a>
+    </div>    
+  <% }); %>  
+</div>
 
-  <div class="btn-row">
-    <a class="btn btn-primary" href="/tours/<%= tour.id %>">View</a>
-    <a class="btn btn-primary" href="/tours/<%= tour.id %>/edit">Edit</a>
-    <a class="btn btn-danger" href="/tours/<%= tour.id %>/delete">Delete</a>
-  </div>    
-<% }); %>  
 

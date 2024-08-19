@@ -1,0 +1,19 @@
+﻿.category-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.category-name {
+  font-size: 1.5rem;
+  margin-left: 3rem;
+}
+
+.category-name a {
+  text-decoration: none;
+  color: var(--color-text-dark);
+}
+
+.category-name a:hover {
+  color: black;
+}
