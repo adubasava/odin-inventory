@@ -41,7 +41,7 @@ async function getAllTours() {
 
 async function getTourById(tourId) {
   const { rows } = await pool.query(
-    "SELECT tours.id, title, description, location, image, name FROM tours INNER JOIN categories ON category_id=categories.id WHERE tours.id = $1",
+    "SELECT tours.id, title, description, location, image, category_id, name FROM tours INNER JOIN categories ON category_id=categories.id WHERE tours.id = $1",
     [tourId],
   );
   console.log(rows);
@@ -63,6 +63,24 @@ async function addTour(title, description, location, image, categoryId) {
   );
 }
 
+async function updateTour(
+  title,
+  description,
+  location,
+  image,
+  categoryId,
+  tourId,
+) {
+  await pool.query(
+    "UPDATE tours SET title = ($1), description = ($2), location = ($3), image = ($4), category_id = ($5) WHERE id = ($6)",
+    [title, description, location, image, categoryId, tourId],
+  );
+}
+
+async function removeTour(tourId) {
+  await pool.query("DELETE FROM tours WHERE id = ($1)", [tourId]);
+}
+
 module.exports = {
   getAllCategories,
   getCategoryByName,
@@ -73,4 +91,6 @@ module.exports = {
   addTour,
   updateCategory,
   removeCategory,
+  updateTour,
+  removeTour,
 };

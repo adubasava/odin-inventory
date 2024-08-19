@@ -56,7 +56,7 @@ async function renderCategory(req, res) {
 async function editCategoryForm(req, res) {
   try {
     const name = req.params.id;
-    res.render(`categories/edit`, { name: name });
+    res.render("categories/edit", { name: name });
   } catch {
     res.redirect("/categories");
   }
@@ -112,9 +112,10 @@ async function getTours(req, res) {
 }
 
 async function newTourForm(req, res) {
+  const tour = {};
   try {
     const categories = await db.getAllCategories();
-    res.render("tours/new", { categories: categories });
+    res.render("tours/new", { categories: categories, tour: tour });
   } catch (e) {
     console.error(e.message);
     res.redirect("/tours");
@@ -152,6 +153,58 @@ async function renderTour(req, res) {
   }
 }
 
+async function editTourForm(req, res) {
+  const tourId = req.params.id;
+  try {
+    const categories = await db.getAllCategories();
+    const tour = await db.getTourById(tourId);
+    res.render("tours/edit", {
+      categories: categories,
+      tour: tour,
+    });
+  } catch (e) {
+    console.error(e.message);
+    res.redirect("/tours");
+  }
+}
+
+async function editTour(req, res) {
+  const tourId = req.params.id;
+  const { title, description, location, categoryId } = req.body;
+  const image = "";
+  try {
+    await db.updateTour(
+      title,
+      description,
+      location,
+      image,
+      categoryId,
+      tourId,
+    );
+    res.redirect("/tours");
+  } catch (e) {
+    console.error(e.message);
+    res.render("tours/edit", {
+      errorMessage: "Error editing Tour",
+    });
+  }
+}
+
+async function deleteTour(req, res) {
+  const tourId = req.params.id;
+  const tours = await db.getAllTours();
+  try {
+    await db.removeTour(tourId);
+    res.redirect("/");
+  } catch (e) {
+    console.error(e.message);
+    res.render("tours/index", {
+      tours: tours,
+      errorMessage: "Error deliting Tour",
+    });
+  }
+}
+
 module.exports = {
   getCategories,
   browseCategories,
@@ -165,4 +218,7 @@ module.exports = {
   editCategoryForm,
   editCategory,
   deleteCategory,
+  editTourForm,
+  editTour,
+  deleteTour,
 };

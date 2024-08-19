@@ -1,16 +1,22 @@
 ﻿<label for="title">Tour title: </label>
-<input id="title" type="text" name="title" />
+<input id="title" type="text" name="title" value="<%= tour[0].title %>" />
 <label for="description">Short description: </label>
-<textarea name="description" id="description" />
+<textarea name="description" id="description" /><%= tour[0].description %>
 </textarea>
 <label for="location">Location: </label>
-<input id="location" type="text" name="location" />
+<input id="location" type="text" name="location" value="<%= tour[0].location %>" />
 <label for="categoryId">Category: </label>
 <select name="categoryId" id="categoryId">
 <% categories.forEach(category => { %>
-    <option value="<%= category.id %>">
-        <%= category.name %>
-    </option>
+    <% if (category.id === tour[0].category_id) { %>
+        <option selected label="<%= category.name %>" value="<%= category.id %>">
+      <% } else { %>
+        <option value="<%= category.id %>">
+            <%= category.name %>
+        </option>
+    <% } %>
 <% }); %>  
 </select> 
+
+
 

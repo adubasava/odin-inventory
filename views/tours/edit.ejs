@@ -1,0 +1,6 @@
+﻿<p>Update Tour</p>
+<form method="POST" action="/tours/<%= tour[0].id %>/edit">
+  <%- include("_form_fields") %>
+  <a href="/tours/<%= tour[0].id %>">Cancel</a>
+  <button class="submit" type="submit">Create</button>
+</form>
