@@ -1,6 +1,6 @@
 ﻿:root {
-  --color-text-dark: hsl(200, 100%, 25%);
-  --color-text-light: hsl(200, 100%, 75%);
-  --color-danger-light: hsl(20, 100%, 75%);
-  --color-danger-dark: hsl(20, 100%, 25%);
+  --color-text-dark: hsl(200, 100%, 35%);
+  --color-text-light: hsl(200, 100%, 85%);
+  --color-danger-light: hsl(20, 100%, 85%);
+  --color-danger-dark: hsl(20, 100%, 35%);
 }

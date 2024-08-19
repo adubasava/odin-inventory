@@ -1,6 +1,8 @@
 ﻿<h2 class="page-header">Update Tour</h2>
-<form method="POST" action="/tours/<%= tour.id %>/edit">
+<form method="POST" action="/tours/<%= tour[0].id %>/edit">
   <%- include("_form_fields") %>
-  <a href="/tours/<%= tour.id %>">Cancel</a>
-  <button class="submit" type="submit">Create</button>
+  <div class="form-row form-row-end btn-row">
+    <a class="btn btn-danger" href="/tours/<%= tour[0].id %>">Cancel</a>
+    <button class="btn btn-primary" type="submit">Create</button>
+  </div>
 </form>

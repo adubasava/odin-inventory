@@ -112,9 +112,10 @@ async function getTours(req, res) {
 }
 
 async function newTourForm(req, res) {
+  const tour = [];
   try {
     const categories = await db.getAllCategories();
-    res.render("tours/new", { categories: categories });
+    res.render("tours/new", { categories: categories, tour: tour });
   } catch (e) {
     console.error(e.message);
     res.redirect("/tours");
@@ -156,7 +157,7 @@ async function editTourForm(req, res) {
   const tourId = req.params.id;
   try {
     const categories = await db.getAllCategories();
-    let tour = await db.getTourById(tourId);
+    const tour = await db.getTourById(tourId);
     res.render("tours/edit", {
       categories: categories,
       tour: tour,
