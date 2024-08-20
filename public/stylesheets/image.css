@@ -1,0 +1,13 @@
+﻿:root {
+  --image-size-big: 400px;
+  --image-size-small: 150px;
+}
+
+.img-big {
+  width: var(--image-size-big);
+}
+
+.img-small {
+  width: auto;
+  height: var(--image-size-small);
+}

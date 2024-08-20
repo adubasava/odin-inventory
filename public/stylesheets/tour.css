@@ -41,3 +41,37 @@
   grid-area: cat;
   justify-self: stretch;
 }
+
+.stretch-btn {
+  justify-self: stretch;
+}
+
+.tour-grid-cards {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, 350px);
+}
+
+.tour-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+  gap: 1rem;
+}
+
+.tour-title {
+  font-size: 1.5rem;
+}
+
+.tour-title a {
+  text-decoration: none;
+  color: var(--color-text-dark);
+}
+
+.tour-title a:hover {
+  color: black;
+}

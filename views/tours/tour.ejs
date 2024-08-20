@@ -1,16 +1,15 @@
 ﻿<h2 class="page-header"><%= tour[0].title %></h2>
 <div class="tour-details">
   <div>
-    <% if (tour[0].image != null && tour[0].image != '') { %> 
-      <img
-      src="/images/<%= tour[0].image %>"
+    <% if (tour[0].imageurl != null && tour[0].imageurl != '') { %> 
+      <img class="img-big"
+      src="<%= tour[0].imageurl %>"
       alt="<%= tour[0].title %>"
-      width="150"
     />
     <% } %>
     <div class="tour-details-btn-grid">
-      <a class="btn btn-primary" href="/tours/<%= tour[0].id %>/edit">Edit</a>
-      <a class="btn btn-danger" href="/tours/<%= tour[0].id %>/delete">Delete</a>
+      <a class="btn btn-primary stretch-btn" href="/tours/<%= tour[0].id %>/edit">Edit</a>
+      <a class="btn btn-danger stretch-btn" href="/tours/<%= tour[0].id %>/delete">Delete</a>
       <a class="btn btn-primary tour-details-category-btn" href="/categories/<%= tour[0].name %>">View Category</a>
     </div>    
   </div>
@@ -30,7 +29,7 @@
   </div>  
 </div>
 
-<div class="btn-row">
-  <a class="btn btn-primary" href="/tours">Back to Tours </a>
+<div class="tour-details-btn-grid">
+  <a class="btn btn-info tour-details-category-btn" href="/tours">Back to Tours </a>
 </div>
 

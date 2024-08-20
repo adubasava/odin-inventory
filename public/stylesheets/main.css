@@ -4,6 +4,7 @@
 @import "form.css";
 @import "category.css";
 @import "tour.css";
+@import "image.css";
 
 :root {
   font-family: "Sedan", serif;

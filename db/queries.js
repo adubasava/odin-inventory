@@ -34,14 +34,14 @@ async function removeCategory(categoryName) {
 
 async function getAllTours() {
   const { rows } = await pool.query(
-    "SELECT tours.id, title, description, location, image, name FROM tours INNER JOIN categories ON category_id=categories.id;",
+    "SELECT tours.id, title, description, location, imageurl, name FROM tours INNER JOIN categories ON category_id=categories.id;",
   );
   return rows;
 }
 
 async function getTourById(tourId) {
   const { rows } = await pool.query(
-    "SELECT tours.id, title, description, location, image, category_id, name FROM tours INNER JOIN categories ON category_id=categories.id WHERE tours.id = $1",
+    "SELECT tours.id, title, description, location, imageurl, category_id, name FROM tours INNER JOIN categories ON category_id=categories.id WHERE tours.id = $1",
     [tourId],
   );
   console.log(rows);
@@ -50,16 +50,16 @@ async function getTourById(tourId) {
 
 async function getTourByCategory(categoryName) {
   const { rows } = await pool.query(
-    "SELECT title, description, location, image, name FROM tours INNER JOIN categories ON category_id=categories.id WHERE name = $1",
+    "SELECT title, description, location, imageurl, name FROM tours INNER JOIN categories ON category_id=categories.id WHERE name = $1",
     [categoryName],
   );
   return rows;
 }
 
-async function addTour(title, description, location, image, categoryId) {
+async function addTour(title, description, location, imageurl, categoryId) {
   await pool.query(
-    "INSERT INTO tours (title, description, location, image, category_id) VALUES ($1, $2, $3, $4, $5)",
-    [title, description, location, image, categoryId],
+    "INSERT INTO tours (title, description, location, imageurl, category_id) VALUES ($1, $2, $3, $4, $5)",
+    [title, description, location, imageurl, categoryId],
   );
 }
 
@@ -67,13 +67,13 @@ async function updateTour(
   title,
   description,
   location,
-  image,
+  imageurl,
   categoryId,
   tourId,
 ) {
   await pool.query(
-    "UPDATE tours SET title = ($1), description = ($2), location = ($3), image = ($4), category_id = ($5) WHERE id = ($6)",
-    [title, description, location, image, categoryId, tourId],
+    "UPDATE tours SET title = ($1), description = ($2), location = ($3), imageURL = ($4), category_id = ($5) WHERE id = ($6)",
+    [title, description, location, imageurl, categoryId, tourId],
   );
 }
 

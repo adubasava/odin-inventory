@@ -2,9 +2,11 @@
   --color-btn-border: black;
   --color-btn-default: black;
   --color-btn-primary-background: var(--color-text-light);
-  --color-btn-danger-background: var(--color-danger-light);
   --color-btn-primary-background-dark: var(--color-text-dark);
+  --color-btn-danger-background: var(--color-danger-light);
   --color-btn-danger-background-dark: var(--color-danger-dark);
+  --color-btn-info-background: var(--color-info-light);
+  --color-btn-info-background-dark: var(--color-info-dark);
 }
 
 .btn {
@@ -37,6 +39,15 @@
   color: white;
 }
 
+.btn-info {
+  background-color: var(--color-btn-info-background);
+}
+
+.btn-info:hover {
+  background-color: var(--color-btn-info-background-dark);
+  color: white;
+}
+
 .btn-row {
   display: flex;
   align-items: flex-start;
@@ -48,4 +59,10 @@
 
 .btn-row > *:first-child {
   margin-left: 0;
+}
+
+.btn-small {
+  border-radius: 0.3rem;
+  padding: 0.3rem 0.5rem;
+  font-size: 1rem;
 }

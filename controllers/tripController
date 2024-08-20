@@ -32,7 +32,7 @@ async function creatNewCategory(req, res) {
     res.redirect("/");
   } catch {
     res.render("categories/new", {
-      categoryName: categoryName,
+      name: categoryName,
       errorMessage: "Error creating Category",
     });
   }
@@ -123,10 +123,9 @@ async function newTourForm(req, res) {
 }
 
 async function creatNewTour(req, res) {
-  const { title, description, location, categoryId } = req.body;
-  const image = "";
+  const { title, description, location, imageurl, categoryId } = req.body;
   try {
-    await db.addTour(title, description, location, image, categoryId);
+    await db.addTour(title, description, location, imageurl, categoryId);
     res.redirect("/tours");
   } catch (e) {
     console.error(e.message);
@@ -170,14 +169,13 @@ async function editTourForm(req, res) {
 
 async function editTour(req, res) {
   const tourId = req.params.id;
-  const { title, description, location, categoryId } = req.body;
-  const image = "";
+  const { title, description, location, imageurl, categoryId } = req.body;
   try {
     await db.updateTour(
       title,
       description,
       location,
-      image,
+      imageurl,
       categoryId,
       tourId,
     );

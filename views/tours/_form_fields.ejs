@@ -1,7 +1,7 @@
 ﻿<div class="form-row">
     <div class="form-item">
         <label for="title">Tour title: </label>
-        <input id="title" type="text" name="title" value="<%= tour? tour[0].title : "" %>" />
+        <input id="title" type="text" name="title" value="<%= tour[0].title %>" />
     </div>
     <div class="form-item">
         <label for="categoryId">Category: </label>
@@ -21,7 +21,11 @@
 <div class="form-row">
     <div class="form-item">
         <label for="location">Location: </label>
-        <input id="location" type="text" name="location" value="<%= tour? tour[0].location : "" %>" />
+        <input id="location" type="text" name="location" value="<%= tour[0].location %>" />
+    </div>
+    <div class="form-item">
+        <label for="imageurl">Image URL: </label>
+        <input id="imageurl" type="text" name="imageurl" value="<%= tour[0].imageurl %>" />
     </div>
 </div>
 <div class="form-row">

@@ -5,13 +5,31 @@
 
 <% if (tours.length > 0) { %>
 <h2 class="page-header">Tours in Category</h2>
-<div class="tour-grid">
+<div class="tour-grid-cards">
     <% tours.forEach(tour => { %>
-        <h4><%= tour.title %> </h4> 
-        <h3><%= tour.description %> </h3>
-        <h3><%= tour.location %> </h3>
-        <h3>Category: <%= tour.name %> </h3>
-    <% }); %>     
-</div>
+      <div class="tour-card"> 
+        <div class="tour-title">
+          <a href="/tours/<%= tour.id %>"><%= tour.title %> </a>
+        </div>
+        <div>
+          <% if (tour.imageurl != null && tour.imageurl != '') { %> 
+            <img class="img-small"
+          src="<%= tour.imageurl %>"
+          alt="<%= tour.title %>"
+        />
+        <% } %>
+        </div>    
+        <div class="btn-row">
+          <a class="btn btn-small btn-primary" href="/tours/<%= tour.id %>">View</a>
+          <a class="btn btn-small btn-primary" href="/tours/<%= tour.id %>/edit">Edit</a>
+          <a class="btn btn-small btn-danger" href="/tours/<%= tour.id %>/delete">Delete</a>
+        </div>    
+      </div>
+    <% }); %>  
+  </div>
 <% } %>
-<a class="btn btn-primary" href="/categories">Back to Categories </a>
+<div class="gap"></div>
+
+<div class="tour-details-btn-grid">
+    <a class="btn btn-info tour-details-category-btn" href="/categories">Back to Categories </a>
+</div>

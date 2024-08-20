@@ -17,3 +17,7 @@
 .category-name a:hover {
   color: black;
 }
+
+.gap {
+  margin-bottom: 2rem;
+}

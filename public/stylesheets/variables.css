@@ -3,4 +3,6 @@
   --color-text-light: hsl(200, 100%, 85%);
   --color-danger-light: hsl(20, 100%, 85%);
   --color-danger-dark: hsl(20, 100%, 35%);
+  --color-info-light: hsl(120, 100%, 85%);
+  --color-info-dark: hsl(120, 100%, 35%);
 }
