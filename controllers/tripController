@@ -1,4 +1,8 @@
 ﻿const db = require("../db/queries");
+const { validationResult } = require("express-validator");
+const myValidationResult = validationResult.withDefaults({
+  formatter: (error) => error.msg,
+});
 
 // --- CATEGORIES ---
 
@@ -26,14 +30,21 @@ async function newCategoryForm(req, res) {
 }
 
 async function creatNewCategory(req, res) {
+  const errors = validationResult(req);
   const categoryName = req.body.name;
+  if (!errors.isEmpty()) {
+    return res.render("categories/new", {
+      name: categoryName,
+      errorMessage: errors.mapped()["name"].msg,
+    });
+  }
   try {
     await db.addCategory(categoryName);
     res.redirect("/");
   } catch {
     res.render("categories/new", {
       name: categoryName,
-      errorMessage: "Error creating Category",
+      errorMessage: "Error creating Category. Category names must be unique!",
     });
   }
 }
@@ -65,6 +76,13 @@ async function editCategoryForm(req, res) {
 async function editCategory(req, res) {
   const oldName = req.params.id;
   const newName = req.body.name;
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.render("categories/edit", {
+      name: oldName,
+      errorMessage: errors.mapped()["name"].msg,
+    });
+  }
   try {
     await db.updateCategory(newName, oldName);
     res.redirect("/");
@@ -123,6 +141,14 @@ async function newTourForm(req, res) {
 }
 
 async function creatNewTour(req, res) {
+  const errors = myValidationResult(req).array();
+  const categories = await db.getAllCategories();
+  if (errors.length > 0) {
+    return res.render("tours/new", {
+      categories: categories,
+      errorMessage: errors.join(" "),
+    });
+  }
   const { title, description, location, imageurl, categoryId } = req.body;
   try {
     await db.addTour(title, description, location, imageurl, categoryId);
@@ -169,6 +195,16 @@ async function editTourForm(req, res) {
 
 async function editTour(req, res) {
   const tourId = req.params.id;
+  const tour = await db.getTourById(tourId);
+  const categories = await db.getAllCategories();
+  const errors = myValidationResult(req).array();
+  if (errors.length > 0) {
+    return res.render("tours/edit", {
+      tour: tour,
+      categories: categories,
+      errorMessage: errors.join(" "),
+    });
+  }
   const { title, description, location, imageurl, categoryId } = req.body;
   try {
     await db.updateTour(
