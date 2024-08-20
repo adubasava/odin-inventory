@@ -4,6 +4,8 @@ const myValidationResult = validationResult.withDefaults({
   formatter: (error) => error.msg,
 });
 
+require("dotenv").config();
+
 // --- CATEGORIES ---
 
 async function getTrendingCategories(req, res) {
@@ -77,7 +79,13 @@ async function editCategoryForm(req, res) {
 
 async function editCategory(req, res) {
   const oldName = req.params.id;
-  const newName = req.body.name;
+  const { name, password } = req.body;
+  if (password !== process.env.PSSWD) {
+    return res.render("categories/edit", {
+      name: oldName,
+      errorMessage: "Wrong password!",
+    });
+  }
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.render("categories/edit", {
@@ -86,7 +94,7 @@ async function editCategory(req, res) {
     });
   }
   try {
-    await db.updateCategory(newName, oldName);
+    await db.updateCategory(name, oldName);
     res.redirect("/");
   } catch (e) {
     console.error(e.message);
@@ -97,8 +105,24 @@ async function editCategory(req, res) {
   }
 }
 
+async function deleteCategoryForm(req, res) {
+  try {
+    const name = req.params.id;
+    res.render("categories/delete", { name: name });
+  } catch {
+    res.redirect("/categories");
+  }
+}
+
 async function deleteCategory(req, res) {
   const categoryName = req.params.id;
+  const { password } = req.body;
+  if (password !== process.env.PSSWD) {
+    return res.render("categories/delete", {
+      name: categoryName,
+      errorMessage: "Wrong password!",
+    });
+  }
   const tours = await db.getTourByCategory(categoryName);
   const categories = await db.getCategoriesWithTourNumber();
   if (tours.length > 0) {
@@ -199,6 +223,15 @@ async function editTour(req, res) {
   const tourId = req.params.id;
   const tour = await db.getTourById(tourId);
   const categories = await db.getAllCategories();
+  const { title, description, location, imageurl, categoryId, password } =
+    req.body;
+  if (password !== process.env.PSSWD) {
+    return res.render("tours/edit", {
+      tour: tour,
+      categories: categories,
+      errorMessage: "Wrong password!",
+    });
+  }
   const errors = myValidationResult(req).array();
   if (errors.length > 0) {
     return res.render("tours/edit", {
@@ -207,7 +240,6 @@ async function editTour(req, res) {
       errorMessage: errors.join(" "),
     });
   }
-  const { title, description, location, imageurl, categoryId } = req.body;
   try {
     await db.updateTour(
       title,
@@ -226,8 +258,24 @@ async function editTour(req, res) {
   }
 }
 
+async function deleteTourForm(req, res) {
+  const tourId = req.params.id;
+  try {
+    res.render("tours/delete", { id: tourId });
+  } catch {
+    res.redirect("/tours");
+  }
+}
+
 async function deleteTour(req, res) {
   const tourId = req.params.id;
+  const { password } = req.body;
+  if (password !== process.env.PSSWD) {
+    return res.render("tours/delete", {
+      id: tourId,
+      errorMessage: "Wrong password!",
+    });
+  }
   const tours = await db.getAllTours();
   try {
     await db.removeTour(tourId);
@@ -253,8 +301,10 @@ module.exports = {
   creatNewTour,
   editCategoryForm,
   editCategory,
+  deleteCategoryForm,
   deleteCategory,
   editTourForm,
   editTour,
+  deleteTourForm,
   deleteTour,
 };

@@ -31,6 +31,8 @@ router.get("/:id/edit", tripController.editTourForm);
 
 router.post("/:id/edit", [validateTour], tripController.editTour);
 
-router.get("/:id/delete", tripController.deleteTour);
+router.get("/:id/delete", tripController.deleteTourForm);
+
+router.post("/:id/delete", tripController.deleteTour);
 
 module.exports = router;

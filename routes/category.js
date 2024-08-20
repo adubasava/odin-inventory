@@ -26,6 +26,8 @@ router.get("/:id/edit", tripController.editCategoryForm);
 
 router.post("/:id/edit", [validateCategory], tripController.editCategory);
 
-router.get("/:id/delete", tripController.deleteCategory);
+router.get("/:id/delete", tripController.deleteCategoryForm);
+
+router.post("/:id/delete", tripController.deleteCategory);
 
 module.exports = router;

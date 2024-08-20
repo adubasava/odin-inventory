@@ -2,6 +2,8 @@
   --form-label-font-size: 1.2rem;
   --form-input-border-color: var(--color-text-dark);
   --form-input-background-color: var(--color-text-light);
+  --form-password-background-color: var(--color-danger-light);
+  --form-label-password-background-color: var(--color-danger-dark);
 }
 
 .form-row {
@@ -54,4 +56,12 @@
 .form-item textarea {
   height: 100%;
   resize: none;
+}
+
+.form-item .password {
+  background-color: var(--form-password-background-color);
+}
+
+.form-item > .label-password {
+  color: var(--form-label-password-background-color);
 }
