@@ -1,5 +1,20 @@
-﻿<h2 class="page-header">Browse by Category</h2>
+﻿<div class="index-container">
+        <div class="index-categories">
+                <h2 class="index-header">Trending Categories</h2>
+                <% categories.forEach(category => { %>
+                        <div class="index-row">
+                            <div class="index-item"><a href="/categories/<%= category.name %>"><%= category.name %></a> </div> 
+                        </div>         
+                <% }); %>  
+        </div>
+        
+        <div class="index-tours">
+                <h2 class="index-header">Recently Added Tours</h2>
+                <% tours.forEach(tour => { %>
+                        <div class="index-row">
+                            <div class="index-item"><a href="/tours/<%= tour.id %>"><%= tour.title %></a> </div> 
+                        </div>         
+                <% }); %>
+        </div>
+</div>
 
-<% for (let i = 0; i < categories.length; i++) { %>    
-        <h4><%= categories[i].name %> </h4> 
-<% } %> 

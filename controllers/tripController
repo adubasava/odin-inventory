@@ -6,10 +6,11 @@ const myValidationResult = validationResult.withDefaults({
 
 // --- CATEGORIES ---
 
-async function getCategories(req, res) {
+async function getTrendingCategories(req, res) {
   try {
-    const categories = await db.getAllCategories();
-    res.render("index", { categories: categories });
+    const categories = await db.getCategoriesWithTours();
+    const tours = await db.getRecentTours();
+    res.render("index", { categories: categories, tours: tours });
   } catch {
     res.redirect("/");
   }
@@ -17,9 +18,10 @@ async function getCategories(req, res) {
 
 async function browseCategories(req, res) {
   try {
-    const categories = await db.getAllCategories();
+    const categories = await db.getCategoriesWithTourNumber();
     res.render("categories/index", { categories: categories });
-  } catch {
+  } catch (e) {
+    console.error(e.message);
     res.redirect("/");
   }
 }
@@ -98,7 +100,7 @@ async function editCategory(req, res) {
 async function deleteCategory(req, res) {
   const categoryName = req.params.id;
   const tours = await db.getTourByCategory(categoryName);
-  const categories = await db.getAllCategories();
+  const categories = await db.getCategoriesWithTourNumber();
   if (tours.length > 0) {
     res.render("categories/index", {
       categories: categories,
@@ -240,7 +242,7 @@ async function deleteTour(req, res) {
 }
 
 module.exports = {
-  getCategories,
+  getTrendingCategories,
   browseCategories,
   newCategoryForm,
   creatNewCategory,

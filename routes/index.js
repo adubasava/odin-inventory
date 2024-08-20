@@ -3,6 +3,6 @@ const router = express.Router();
 
 const tripController = require("../controllers/tripController");
 
-router.get("/", tripController.getCategories);
+router.get("/", tripController.getTrendingCategories);
 
 module.exports = router;

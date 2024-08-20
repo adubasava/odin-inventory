@@ -7,16 +7,16 @@
       </div>
       <div>
         <% if (tour.imageurl != null && tour.imageurl != '') { %> 
-          <img class="img-small"
+          <img class="img-big"
         src="<%= tour.imageurl %>"
         alt="<%= tour.title %>"
       />
       <% } %>
       </div>    
       <div class="btn-row">
-        <a class="btn btn-small btn-primary" href="/tours/<%= tour.id %>">View</a>
-        <a class="btn btn-small btn-primary" href="/tours/<%= tour.id %>/edit">Edit</a>
-        <a class="btn btn-small btn-danger" href="/tours/<%= tour.id %>/delete">Delete</a>
+        <a class="btn btn-primary" href="/tours/<%= tour.id %>">View</a>
+        <a class="btn btn-primary" href="/tours/<%= tour.id %>/edit">Edit</a>
+        <a class="btn btn-danger" href="/tours/<%= tour.id %>/delete">Delete</a>
       </div>    
     </div>
   <% }); %>  

@@ -7,6 +7,20 @@ async function getAllCategories() {
   return rows;
 }
 
+async function getCategoriesWithTourNumber() {
+  const { rows } = await pool.query(
+    "SELECT name, COUNT(title) AS tnumber  FROM categories LEFT JOIN tours ON category_id=categories.id GROUP BY categories.name;",
+  );
+  return rows;
+}
+
+async function getCategoriesWithTours() {
+  const { rows } = await pool.query(
+    "SELECT name, COUNT(title) AS tnumber  FROM categories LEFT JOIN tours ON category_id=categories.id GROUP BY categories.name HAVING COUNT(title) > 0 ORDER BY COUNT(title) DESC LIMIT 3;",
+  );
+  return rows;
+}
+
 async function getCategoryByName(categoryName) {
   const { rows } = await pool.query(
     "SELECT * FROM categories WHERE name = $1",
@@ -35,6 +49,13 @@ async function removeCategory(categoryName) {
 async function getAllTours() {
   const { rows } = await pool.query(
     "SELECT tours.id, title, description, location, imageurl, name FROM tours INNER JOIN categories ON category_id=categories.id;",
+  );
+  return rows;
+}
+
+async function getRecentTours() {
+  const { rows } = await pool.query(
+    "SELECT tours.id, title, description, location, imageurl, name FROM tours INNER JOIN categories ON category_id=categories.id ORDER BY tours.id DESC LIMIT 3;",
   );
   return rows;
 }
@@ -83,9 +104,12 @@ async function removeTour(tourId) {
 
 module.exports = {
   getAllCategories,
+  getCategoriesWithTourNumber,
+  getCategoriesWithTours,
   getCategoryByName,
   addCategory,
   getAllTours,
+  getRecentTours,
   getTourById,
   getTourByCategory,
   addTour,
