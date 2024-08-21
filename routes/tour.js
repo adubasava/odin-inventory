@@ -17,22 +17,22 @@ const validateTour = [
     .withMessage(`Tour URL ${urlErr}`),
 ];
 
-const tripController = require("../controllers/tripController");
+const tourController = require("../controllers/tourController");
 
-router.get("/", tripController.getTours);
+router.get("/", tourController.getTours);
 
-router.get("/new", tripController.newTourForm);
+router.get("/new", tourController.newTourForm);
 
-router.post("/new", [validateTour], tripController.creatNewTour);
+router.post("/new", [validateTour], tourController.creatNewTour);
 
-router.get("/:id", tripController.renderTour);
+router.get("/:id", tourController.renderTour);
 
-router.get("/:id/edit", tripController.editTourForm);
+router.get("/:id/edit", tourController.editTourForm);
 
-router.post("/:id/edit", [validateTour], tripController.editTour);
+router.post("/:id/edit", [validateTour], tourController.editTour);
 
-router.get("/:id/delete", tripController.deleteTourForm);
+router.get("/:id/delete", tourController.deleteTourForm);
 
-router.post("/:id/delete", tripController.deleteTour);
+router.post("/:id/delete", tourController.deleteTour);
 
 module.exports = router;

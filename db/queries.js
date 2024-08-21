@@ -71,7 +71,7 @@ async function getTourById(tourId) {
 
 async function getTourByCategory(categoryName) {
   const { rows } = await pool.query(
-    "SELECT title, description, location, imageurl, name FROM tours INNER JOIN categories ON category_id=categories.id WHERE name = $1",
+    "SELECT tours.id, title, description, location, imageurl, name FROM tours INNER JOIN categories ON category_id=categories.id WHERE name = $1",
     [categoryName],
   );
   return rows;

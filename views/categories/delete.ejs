@@ -1,21 +1,10 @@
 ﻿<h2 class="page-header">Delete Category</h2>
 <form method="POST" action="/categories/<%= name %>/delete">
-  <div class="form-row">
-    <div class="form-item">
-      <label class="label-password" for="password">Enter password: </label>
-      <input
-        class="password"
-        id="password"
-        type="password"
-        name="password"
-        required
-      />
-    </div>
-  </div>
+  <%- include("_form_confirm") %>
   <div class="form-row form-row-end btn-row">
     <a class="btn btn-danger" href="/categories/<%= name %>">Cancel</a>
     <button
-      class="btn btn-primary"
+      class="btn btn-danger"
       type="submit"
       onclick="return confirm('Are you sure?')"
     >

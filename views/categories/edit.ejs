@@ -1,6 +1,12 @@
 ﻿<h2 class="page-header">Edit Category</h2>
 <form method="POST" action="/categories/<%= name %>/edit">
-  <%- include("_form_fields") %>
+  <div class="form-row">
+    <div class="form-item">
+      <label for="name">Category name: </label>
+      <input id="name" type="text" name="name" value="<%= name %>" required />
+    </div>
+  </div>
+  <%- include("_form_confirm") %>
   <div class="form-row form-row-end btn-row">
     <a class="btn btn-danger" href="/categories/<%= name %>">Cancel</a>
     <button class="btn btn-primary" type="submit">Update</button>
